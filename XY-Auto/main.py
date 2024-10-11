@@ -6,50 +6,66 @@ import compare
 import write
 import keyboard
 import time
-xx = None
+import adb
 
+xx = 0
 
+#比大小
 def start():
-
     target_window_title = 'BlueStacks'
     target_window = gw.getWindowsWithTitle(target_window_title)[0]
     window = target_window
-
 #获取截图
     Img.take_screenshot(target_window)
-
 #当前游戏坐标
     left = window.left
     top = window.top
     width = window.width
     height = window.height
-    li = compare.get_Com()
+    global xx
+    compare.get_Com(xx,left=left,top=top)
+    print("解题完成！")
 
-    x = li[0]
-    y = li[1]
+def company():
+    target_window_title = 'BlueStacks'
+    target_window = gw.getWindowsWithTitle(target_window_title)[0]
+    window = target_window
+#获取截图
+    Img.take_screenshot(target_window)
+#当前游戏坐标
+    left = window.left
+    top = window.top
+    width = window.width
+    height = window.height
 
-    print("x:",x,"y:",y)
+    Img.get_XY(left+50,top+300,left+450,top+510,'com.png')
+             
+    s = Image_words.img("XY-Auto\\images\\com.png")
+    s = s.replace('×','*')
+    s = s.replace('=','')
+    print (s)
+    res = eval(s)
 
-    if(x>y): write.draw_greater_than(left+200,top+600,25)
-    if(x<y): write.draw_less_than(left+200,top+600,25)
+    print("计算结果：",res)
 
+    adb.draw_decimal(res,x=left+40,y=top+800)
+
+
+
+print(1)
 
 while True:
-
     if(keyboard.is_pressed('space')):
-        print('结束 ')
         break
     try:
-            start()
-            time.sleep(0.09)
+        start()
+        #adb.swipe_screen('<',base_resolution=(720,1280))
+        
     except Exception as e :
-        print(...)
+        print(e)
+        time.sleep(0.1)
+        write.click(config.shouxia_x,config.shouxia_y)
+        write.click(config.jixu_x,config.jixu_y)
+        write.click(config.zilai_x,config.zilai_y)
     finally:
         continue
-
-
-
-
-
-
-
