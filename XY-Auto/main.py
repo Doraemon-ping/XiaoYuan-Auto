@@ -51,9 +51,6 @@ def company():
     adb.draw_decimal(res,x=left+40,y=top+800)
 
 
-
-print(1)
-
 while True:
     if(keyboard.is_pressed('space')):
         break
